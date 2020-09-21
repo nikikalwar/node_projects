@@ -17,9 +17,12 @@ var server=http.createServer(function(req,res){
     //get the path 
     var path=parsedUrl.pathname;
     var trimmedPath=path.replace(/^\/+|\/+$/g,'');
- 
+
+    //get the HTTP method
+    var method=req.method.toLowerCase();
+
     //log the path
-    console.log('Request received on the path:'+trimmedPath)
+    console.log('Request received on the path:'+trimmedPath+' the method is '+method);
     //send the response
     res.end('Hello to the port 3000');
 
