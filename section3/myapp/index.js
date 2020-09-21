@@ -36,7 +36,7 @@ var server=http.createServer(function(req,res){
             req.on('data',function(data){
                 buffer+=decoder.end();
             });
-                
+
             //printing the payload which we received
             console.log('Request received with payload ',buffer);
             //send the response
@@ -53,3 +53,10 @@ var server=http.createServer(function(req,res){
             server.listen(3000,function(){
                 console.log("the server is listening to port 3000 now");
             });
+
+
+            //Define the handlers
+            var handlers={};
+
+            //sample handler
+            
