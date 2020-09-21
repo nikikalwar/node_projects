@@ -18,11 +18,18 @@ var server=http.createServer(function(req,res){
     var path=parsedUrl.pathname;
     var trimmedPath=path.replace(/^\/+|\/+$/g,'');
 
-    //get the HTTP method
-    var method=req.method.toLowerCase();
+        //get the query String as object
+        var queryStringObject=parsedUrl.query;
+        
+
+        //get the HTTP method
+        var method=req.method.toLowerCase();
+
+        //print
+        
 
     //log the path
-    console.log('Request received on the path:'+trimmedPath+' the method is '+method);
+    console.log('Request received on the path:'+trimmedPath+' the method is '+method+'query string object',queryStringObject);
     //send the response
     res.end('Hello to the port 3000');
 
