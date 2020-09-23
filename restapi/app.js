@@ -5,6 +5,7 @@ Primary files
 //Dependencies
 var http=require('http');
 var url=require('url');
+var StringDecoder  = require('string_decoder').StringDecoder;
 
 //the server responds to all request with a string
 var server=http.createServer(function(req,res){
@@ -25,16 +26,26 @@ var server=http.createServer(function(req,res){
         //get the HTTP method
         var method=req.method.toLowerCase();
 
-        //print
+        //get the headers as an object
+        var headers=req.headers;
+
+        //get the payload,if any
+        var decoder=new StringDecoder('utf-8');
+        var buffer= '';
+        req.on('data',function(data){
+            buffer+=decoder.write(data);
+        });
+
+        req.on('end',function(){
+            buffer+=decoder.end();
         
+        //log the request path
+        console.log("The payload received is :",buffer);
 
-    //log the path
-    console.log('Request received on the path:'+trimmedPath+' the method is '+method+'query string object',queryStringObject);
-    //send the response
-    res.end('Hello to the port 3000');
+        //send the response
+        res.end('Hello to the port 3000');
 
-
-
+        });
 
 });
 
